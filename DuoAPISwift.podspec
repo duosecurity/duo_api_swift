@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = "DuoAPISwift"
-  spec.version = "1.0.0"
+  spec.version = "1.0.1"
   spec.summary = "Duo Security API client for Swift."
   spec.homepage = "https://duo.com"
   spec.license = { type: 'BSD', file: 'LICENSE' }
@@ -13,7 +13,7 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
   spec.source = {
       git: "https://github.com/duosecurity/duo_api_swift.git",
-      tag: "v#{spec.version}",
+      tag: spec.version,
       submodules: true
   }
   spec.source_files = "DuoAPISwift/**/*.{h,swift}"
