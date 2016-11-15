@@ -1,0 +1,482 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		570863941D428B9F00FB86B6 /* DuoAPISwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 570863931D428B9F00FB86B6 /* DuoAPISwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5708639B1D428B9F00FB86B6 /* DuoAPISwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 570863901D428B9F00FB86B6 /* DuoAPISwift.framework */; };
+		570863A01D428B9F00FB86B6 /* DuoAPISwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5708639F1D428B9F00FB86B6 /* DuoAPISwiftTests.swift */; };
+		570863AB1D428E4100FB86B6 /* Client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570863AA1D428E4100FB86B6 /* Client.swift */; };
+		570863AD1D428F8100FB86B6 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570863AC1D428F8100FB86B6 /* Util.swift */; };
+		570863B21D46A91200FB86B6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570863B11D46A91200FB86B6 /* Extensions.swift */; };
+		570863BE1D491B3F00FB86B6 /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570863BD1D491B3F00FB86B6 /* Auth.swift */; };
+		576C01EC1DAE7C5B001E0024 /* NSURLSessionPinningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576C01EB1DAE7C5B001E0024 /* NSURLSessionPinningDelegate.swift */; };
+		57FDEEAF1DAEB541003869AD /* DigiCert_Assured_ID_Root_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAA1DAEB541003869AD /* DigiCert_Assured_ID_Root_CA.der */; };
+		57FDEEB01DAEB541003869AD /* DigiCert_Assured_ID_Root_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAA1DAEB541003869AD /* DigiCert_Assured_ID_Root_CA.der */; };
+		57FDEEB11DAEB541003869AD /* DigiCert_Global_Root_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAB1DAEB541003869AD /* DigiCert_Global_Root_CA.der */; };
+		57FDEEB21DAEB541003869AD /* DigiCert_Global_Root_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAB1DAEB541003869AD /* DigiCert_Global_Root_CA.der */; };
+		57FDEEB31DAEB541003869AD /* DigiCert_High_Assurance_EV_Root_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAC1DAEB541003869AD /* DigiCert_High_Assurance_EV_Root_CA.der */; };
+		57FDEEB41DAEB541003869AD /* DigiCert_High_Assurance_EV_Root_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAC1DAEB541003869AD /* DigiCert_High_Assurance_EV_Root_CA.der */; };
+		57FDEEB51DAEB541003869AD /* Secure_Global_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAD1DAEB541003869AD /* Secure_Global_CA.der */; };
+		57FDEEB61DAEB541003869AD /* Secure_Global_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAD1DAEB541003869AD /* Secure_Global_CA.der */; };
+		57FDEEB71DAEB541003869AD /* SecureTrust_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAE1DAEB541003869AD /* SecureTrust_CA.der */; };
+		57FDEEB81DAEB541003869AD /* SecureTrust_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 57FDEEAE1DAEB541003869AD /* SecureTrust_CA.der */; };
+		7FA9A8121D5BCEAB009D5639 /* ClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA9A8111D5BCEAB009D5639 /* ClientTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5708639C1D428B9F00FB86B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 570863871D428B9F00FB86B6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5708638F1D428B9F00FB86B6;
+			remoteInfo = DuoAPISwift;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		570863901D428B9F00FB86B6 /* DuoAPISwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DuoAPISwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		570863931D428B9F00FB86B6 /* DuoAPISwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DuoAPISwift.h; sourceTree = "<group>"; };
+		570863951D428B9F00FB86B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5708639A1D428B9F00FB86B6 /* DuoAPISwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DuoAPISwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5708639F1D428B9F00FB86B6 /* DuoAPISwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DuoAPISwiftTests.swift; sourceTree = "<group>"; };
+		570863A11D428B9F00FB86B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		570863AA1D428E4100FB86B6 /* Client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Client.swift; sourceTree = "<group>"; };
+		570863AC1D428F8100FB86B6 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		570863B11D46A91200FB86B6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		570863BD1D491B3F00FB86B6 /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		576C01EB1DAE7C5B001E0024 /* NSURLSessionPinningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionPinningDelegate.swift; sourceTree = "<group>"; };
+		57FDEEAA1DAEB541003869AD /* DigiCert_Assured_ID_Root_CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = DigiCert_Assured_ID_Root_CA.der; path = "Trusted CA Certificates/DigiCert_Assured_ID_Root_CA.der"; sourceTree = "<group>"; };
+		57FDEEAB1DAEB541003869AD /* DigiCert_Global_Root_CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = DigiCert_Global_Root_CA.der; path = "Trusted CA Certificates/DigiCert_Global_Root_CA.der"; sourceTree = "<group>"; };
+		57FDEEAC1DAEB541003869AD /* DigiCert_High_Assurance_EV_Root_CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = DigiCert_High_Assurance_EV_Root_CA.der; path = "Trusted CA Certificates/DigiCert_High_Assurance_EV_Root_CA.der"; sourceTree = "<group>"; };
+		57FDEEAD1DAEB541003869AD /* Secure_Global_CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = Secure_Global_CA.der; path = "Trusted CA Certificates/Secure_Global_CA.der"; sourceTree = "<group>"; };
+		57FDEEAE1DAEB541003869AD /* SecureTrust_CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = SecureTrust_CA.der; path = "Trusted CA Certificates/SecureTrust_CA.der"; sourceTree = "<group>"; };
+		7FA9A8111D5BCEAB009D5639 /* ClientTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5708638C1D428B9F00FB86B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		570863971D428B9F00FB86B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5708639B1D428B9F00FB86B6 /* DuoAPISwift.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		570863861D428B9F00FB86B6 = {
+			isa = PBXGroup;
+			children = (
+				570863921D428B9F00FB86B6 /* DuoAPISwift */,
+				5708639E1D428B9F00FB86B6 /* DuoAPISwiftTests */,
+				570863911D428B9F00FB86B6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		570863911D428B9F00FB86B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				570863901D428B9F00FB86B6 /* DuoAPISwift.framework */,
+				5708639A1D428B9F00FB86B6 /* DuoAPISwiftTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		570863921D428B9F00FB86B6 /* DuoAPISwift */ = {
+			isa = PBXGroup;
+			children = (
+				570863931D428B9F00FB86B6 /* DuoAPISwift.h */,
+				570863AA1D428E4100FB86B6 /* Client.swift */,
+				570863BD1D491B3F00FB86B6 /* Auth.swift */,
+				570863B11D46A91200FB86B6 /* Extensions.swift */,
+				570863AC1D428F8100FB86B6 /* Util.swift */,
+				576C01EB1DAE7C5B001E0024 /* NSURLSessionPinningDelegate.swift */,
+				57FDEE9A1DAEB0E9003869AD /* Trusted CA Certificates */,
+				570863951D428B9F00FB86B6 /* Info.plist */,
+			);
+			name = DuoAPISwift;
+			path = DuoAPISwift;
+			sourceTree = "<group>";
+		};
+		5708639E1D428B9F00FB86B6 /* DuoAPISwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				5708639F1D428B9F00FB86B6 /* DuoAPISwiftTests.swift */,
+				7FA9A8111D5BCEAB009D5639 /* ClientTests.swift */,
+				570863A11D428B9F00FB86B6 /* Info.plist */,
+			);
+			name = DuoAPISwiftTests;
+			path = DuoAPISwiftTests;
+			sourceTree = "<group>";
+		};
+		57FDEE9A1DAEB0E9003869AD /* Trusted CA Certificates */ = {
+			isa = PBXGroup;
+			children = (
+				57FDEEAA1DAEB541003869AD /* DigiCert_Assured_ID_Root_CA.der */,
+				57FDEEAB1DAEB541003869AD /* DigiCert_Global_Root_CA.der */,
+				57FDEEAC1DAEB541003869AD /* DigiCert_High_Assurance_EV_Root_CA.der */,
+				57FDEEAD1DAEB541003869AD /* Secure_Global_CA.der */,
+				57FDEEAE1DAEB541003869AD /* SecureTrust_CA.der */,
+			);
+			name = "Trusted CA Certificates";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5708638D1D428B9F00FB86B6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				570863941D428B9F00FB86B6 /* DuoAPISwift.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5708638F1D428B9F00FB86B6 /* DuoAPISwift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 570863A41D428B9F00FB86B6 /* Build configuration list for PBXNativeTarget "DuoAPISwift" */;
+			buildPhases = (
+				5708638B1D428B9F00FB86B6 /* Sources */,
+				5708638C1D428B9F00FB86B6 /* Frameworks */,
+				5708638D1D428B9F00FB86B6 /* Headers */,
+				5708638E1D428B9F00FB86B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DuoAPISwift;
+			productName = DuoAPISwift;
+			productReference = 570863901D428B9F00FB86B6 /* DuoAPISwift.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		570863991D428B9F00FB86B6 /* DuoAPISwiftTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 570863A71D428B9F00FB86B6 /* Build configuration list for PBXNativeTarget "DuoAPISwiftTests" */;
+			buildPhases = (
+				570863961D428B9F00FB86B6 /* Sources */,
+				570863971D428B9F00FB86B6 /* Frameworks */,
+				570863981D428B9F00FB86B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5708639D1D428B9F00FB86B6 /* PBXTargetDependency */,
+			);
+			name = DuoAPISwiftTests;
+			productName = DuoAPISwiftTests;
+			productReference = 5708639A1D428B9F00FB86B6 /* DuoAPISwiftTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		570863871D428B9F00FB86B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Duo Security";
+				TargetAttributes = {
+					5708638F1D428B9F00FB86B6 = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+					};
+					570863991D428B9F00FB86B6 = {
+						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
+					};
+				};
+			};
+			buildConfigurationList = 5708638A1D428B9F00FB86B6 /* Build configuration list for PBXProject "DuoAPISwift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 570863861D428B9F00FB86B6;
+			productRefGroup = 570863911D428B9F00FB86B6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5708638F1D428B9F00FB86B6 /* DuoAPISwift */,
+				570863991D428B9F00FB86B6 /* DuoAPISwiftTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5708638E1D428B9F00FB86B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57FDEEB31DAEB541003869AD /* DigiCert_High_Assurance_EV_Root_CA.der in Resources */,
+				57FDEEAF1DAEB541003869AD /* DigiCert_Assured_ID_Root_CA.der in Resources */,
+				57FDEEB11DAEB541003869AD /* DigiCert_Global_Root_CA.der in Resources */,
+				57FDEEB71DAEB541003869AD /* SecureTrust_CA.der in Resources */,
+				57FDEEB51DAEB541003869AD /* Secure_Global_CA.der in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		570863981D428B9F00FB86B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57FDEEB41DAEB541003869AD /* DigiCert_High_Assurance_EV_Root_CA.der in Resources */,
+				57FDEEB01DAEB541003869AD /* DigiCert_Assured_ID_Root_CA.der in Resources */,
+				57FDEEB21DAEB541003869AD /* DigiCert_Global_Root_CA.der in Resources */,
+				57FDEEB81DAEB541003869AD /* SecureTrust_CA.der in Resources */,
+				57FDEEB61DAEB541003869AD /* Secure_Global_CA.der in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5708638B1D428B9F00FB86B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				570863AB1D428E4100FB86B6 /* Client.swift in Sources */,
+				570863B21D46A91200FB86B6 /* Extensions.swift in Sources */,
+				570863AD1D428F8100FB86B6 /* Util.swift in Sources */,
+				576C01EC1DAE7C5B001E0024 /* NSURLSessionPinningDelegate.swift in Sources */,
+				570863BE1D491B3F00FB86B6 /* Auth.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		570863961D428B9F00FB86B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				570863A01D428B9F00FB86B6 /* DuoAPISwiftTests.swift in Sources */,
+				7FA9A8121D5BCEAB009D5639 /* ClientTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5708639D1D428B9F00FB86B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5708638F1D428B9F00FB86B6 /* DuoAPISwift */;
+			targetProxy = 5708639C1D428B9F00FB86B6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		570863A21D428B9F00FB86B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		570863A31D428B9F00FB86B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		570863A51D428B9F00FB86B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = DuoAPISwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duosecurity.DuoAPISwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CommonCrypto";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Debug;
+		};
+		570863A61D428B9F00FB86B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = DuoAPISwift/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duosecurity.DuoAPISwift;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CommonCrypto";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Release;
+		};
+		570863A81D428B9F00FB86B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = DuoAPISwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duosecurity.DuoAPISwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Debug;
+		};
+		570863A91D428B9F00FB86B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = DuoAPISwiftTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.duosecurity.DuoAPISwiftTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5708638A1D428B9F00FB86B6 /* Build configuration list for PBXProject "DuoAPISwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				570863A21D428B9F00FB86B6 /* Debug */,
+				570863A31D428B9F00FB86B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		570863A41D428B9F00FB86B6 /* Build configuration list for PBXNativeTarget "DuoAPISwift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				570863A51D428B9F00FB86B6 /* Debug */,
+				570863A61D428B9F00FB86B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		570863A71D428B9F00FB86B6 /* Build configuration list for PBXNativeTarget "DuoAPISwiftTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				570863A81D428B9F00FB86B6 /* Debug */,
+				570863A91D428B9F00FB86B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 570863871D428B9F00FB86B6 /* Project object */;
+}
