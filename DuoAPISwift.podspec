@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
   spec.name = "DuoAPISwift"
   spec.version = "1.0.1"
   spec.summary = "Duo Security API client for Swift."
-  spec.homepage = "https://duo.com"
+  spec.homepage = "https://github.com/duosecurity/duo_api_swift"
   spec.license = { type: 'BSD', file: 'LICENSE' }
   spec.authors = {
       "James Barclay" => 'jbarclay@duo.com',
