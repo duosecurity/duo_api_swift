@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "container:/Users/jbarclay/src/labs/misc/duo_api_swift/DuoAPISwift.xcodeproj">
+      location = "container:/Users/jbarclay/src/duo_api_swift/DuoAPISwift.xcodeproj">
    </FileRef>
 </Workspace>
