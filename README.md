@@ -1,5 +1,10 @@
 # DuoAPISwift
 
+[![Build Status](https://travis-ci.org/duosecurity/duo_api_swift.svg?branch=master)](https://travis-ci.org/duosecurity/duo_api_swift)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/DuoAPISwift.svg)](https://img.shields.io/cocoapods/v/DuoAPISwift.svg)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![GitHub license](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/duosecurity/duo_api_swift/master/LICENSE)
+
 DuoAPISwift is an API client to call Duo API methods with Swift.
 
 ## Duo Auth API
@@ -13,7 +18,7 @@ The [Duo Auth API][1] provides a low-level API for adding strong two-factor auth
 To install DuoAPISwift with [CocoaPods][2], add the following line to your `Podfile`.
 
 ```
-pod 'DuoAPISwift', '~> 1.0'
+pod 'DuoAPISwift', '~> 1.3'
 ```
 
 Then run `pod install` to add DuoAPISwift to your project.
@@ -23,7 +28,7 @@ Then run `pod install` to add DuoAPISwift to your project.
 To install DuoAPISwift with Carthage, add the following to your `Cartfile`.
 
 ```
-github "duosecurity/duo_api_swift" ~> 1.0
+github "duosecurity/duo_api_swift" ~> 1.3
 ```
 
 Then run `carthage update` to build the framework. When finished, drag `DuoAPISwift.framework` to your Xcode project.
