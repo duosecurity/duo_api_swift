@@ -18,4 +18,5 @@ Pod::Spec.new do |spec|
       submodules: true
   }
   spec.source_files = "DuoAPISwift/**/*.{h,swift}"
+  spec.resources = ['DuoAPISwift/Trusted\ CA\ Certificates/*.der']
 end

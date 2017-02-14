@@ -27,14 +27,13 @@ class NSURLSessionPinningDelegate: NSObject, URLSessionDelegate {
                         let data = CFDataGetBytePtr(serverCertificateData)
                         let size = CFDataGetLength(serverCertificateData)
                         let receivedCert = Data(bytes: UnsafePointer<UInt8>(data!), count: size)
-                        if let frameworkBundle = Bundle(identifier: "com.duosecurity.DuoAPISwift") {
-                            let trustedCACertificates = frameworkBundle.paths(forResourcesOfType: "der", inDirectory: "Resources")
-                            for cert in trustedCACertificates {
-                                if let expectedCert = try? Data(contentsOf: URL(fileURLWithPath: cert)) {
-                                    if receivedCert == expectedCert {
-                                        completionHandler(Foundation.URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
-                                        return
-                                    }
+                        let frameworkBundle = Bundle.init(for: NSURLSessionPinningDelegate.self)
+                        let trustedCACertificates = frameworkBundle.paths(forResourcesOfType: "der", inDirectory: "Resources")
+                        for cert in trustedCACertificates {
+                            if let expectedCert = try? Data(contentsOf: URL(fileURLWithPath: cert)) {
+                                if receivedCert == expectedCert {
+                                    completionHandler(Foundation.URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
+                                    return
                                 }
                             }
                         }
