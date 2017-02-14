@@ -11,7 +11,7 @@ import XCTest
 
 class QueryParameterTests: XCTestCase {
     
-    func assertCanonParams(params: Dictionary<String, [String]>, expected: String) {
+    func assertCanonParams(_ params: Dictionary<String, [String]>, expected: String) {
         XCTAssertEqual(Util.canonicalizeParams(Util.normalizeParams(params)), expected)
     }
 
@@ -117,7 +117,7 @@ class SignTests: XCTestCase {
                                         ])
 
         var expectedSignature = "\(ikey):f01811cbbf9561623ab45b893096267fd46a5178".toBase64()
-        expectedSignature = expectedSignature.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        expectedSignature = expectedSignature.trimmingCharacters(in: CharacterSet.whitespaces)
         expectedSignature = "Basic \(expectedSignature)"
 
         XCTAssertEqual(signature, expectedSignature)
@@ -136,18 +136,18 @@ class RequestTests: XCTestCase {
         super.setUp()
         
         class MockClient: Client {
-            override func makeRequest(method: String, uri: String, headers: Dictionary<String, String>, body: String, completion: (NSData, NSHTTPURLResponse?) -> ()) {
+            override func makeRequest(_ method: String, uri: String, headers: Dictionary<String, String>, body: String, completion: @escaping (Data, HTTPURLResponse?) -> ()) {
                 let response: Dictionary<String, String> = [
                     "method": method,
                     "uri": uri,
                     "body": body,
                     "headers": Util.canonicalizeParams(Util.normalizeParams(headers))
                 ]
-                completion(NSKeyedArchiver.archivedDataWithRootObject(response), nil)
+                completion(NSKeyedArchiver.archivedData(withRootObject: response), nil)
             }
             
-            override func parseJSONResponse(data: NSData) -> AnyObject {
-                return NSKeyedUnarchiver.unarchiveObjectWithData(data)!
+            override func parseJSONResponse(_ data: Data) -> AnyObject {
+                return NSKeyedUnarchiver.unarchiveObject(with: data)! as AnyObject
             }
         }
         self.client = MockClient(ikey: "test_ikey", skey: "test_skey", host: "example.com")
@@ -159,28 +159,28 @@ class RequestTests: XCTestCase {
     }
     
     func testAPICallGetNoParams() {
-        let responseExpectation: XCTestExpectation = expectationWithDescription("duoAPICall GET with no params")
+        let responseExpectation: XCTestExpectation = expectation(description: "duoAPICall GET with no params")
         
         self.client.duoAPICall("GET", path: "/foo/bar", params: [:], completion: {
-            (let data, let httpResponse) in
+            (data, httpResponse) in
 
-            let res = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
+            let res = NSKeyedUnarchiver.unarchiveObject(with: data) as! NSDictionary
             XCTAssertEqual(res["method"] as? String, "GET")
             XCTAssertEqual(res["uri"] as? String, "/foo/bar")
             
             responseExpectation.fulfill()
         })
         
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testAPICallPOSTNoParams() {
-        let responseExpectation: XCTestExpectation = expectationWithDescription("duoAPICall POST with no params")
+        let responseExpectation: XCTestExpectation = expectation(description: "duoAPICall POST with no params")
         
         self.client.duoAPICall("POST", path: "/foo/bar", params: [:], completion: {
-            (let data, let httpResponse) in
+            (data, httpResponse) in
 
-            let res = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
+            let res = NSKeyedUnarchiver.unarchiveObject(with: data) as! NSDictionary
             XCTAssertEqual(res["method"] as? String, "POST")
             XCTAssertEqual(res["uri"] as? String, "/foo/bar")
             XCTAssertEqual(res["body"] as? String, "")
@@ -188,15 +188,18 @@ class RequestTests: XCTestCase {
             responseExpectation.fulfill()
         })
         
-        waitForExpectationsWithTimeout(10, handler: nil)
+        waitForExpectations(timeout: 10, handler: nil)
     }
     
     func testAPICallGETParams() {
-        self.client.duoAPICall("GET", path: "/foo/bar", params: self.inputParams, completion: {
-            (let data, let httpResponse) in
+        self.client.duoAPICall("GET",
+                               path: "/foo/bar",
+                               params: self.inputParams as Dictionary<String, AnyObject>,
+                               completion: {
+            (data, httpResponse) in
 
-            let res = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
-            let uriParts: [String] = res["uri"]!.componentsSeparatedByString("?")
+            let res = NSKeyedUnarchiver.unarchiveObject(with: data) as! NSDictionary
+            let uriParts: [String] = (res["uri"]! as AnyObject).components(separatedBy: "?")
             let uri = uriParts[0]
             let args = uriParts[1]
             
@@ -207,10 +210,13 @@ class RequestTests: XCTestCase {
     }
     
     func testAPICallPOSTParams() {
-        self.client.duoAPICall("POST", path: "/foo/bar", params: self.inputParams, completion: {
-            (let data, let httpResponse) in
+        self.client.duoAPICall("POST",
+                               path: "/foo/bar",
+                               params: self.inputParams as Dictionary<String, AnyObject>,
+                               completion: {
+            (data, httpResponse) in
 
-            let res = NSKeyedUnarchiver.unarchiveObjectWithData(data) as! NSDictionary
+            let res = NSKeyedUnarchiver.unarchiveObject(with: data) as! NSDictionary
             XCTAssertEqual(res["method"] as? String, "POST")
             XCTAssertEqual(res["uri"] as? String, "/foo/bar")
             XCTAssertEqual(res["body"] as? String, self.outputParams)
@@ -227,7 +233,10 @@ class RequestTests: XCTestCase {
     }
     
     func testJSONAPICallPOSTNoParams() {
-        self.client.duoJSONAPICall("POST", path: "/foo/bar", params: self.inputParams, completion: { response in
+        self.client.duoJSONAPICall("POST",
+                                   path: "/foo/bar",
+                                   params: self.inputParams as Dictionary<String, AnyObject>,
+                                   completion: { response in
             let res = response as! NSDictionary
             XCTAssertEqual(res["method"] as? String, "POST")
             XCTAssertEqual(res["uri"] as? String, "/foo/bar")

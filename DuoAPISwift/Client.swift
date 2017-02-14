@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Client: NSObject {
+open class Client: NSObject {
     let ikey: String
     let skey: String
     let host: String
@@ -24,39 +24,43 @@ public class Client: NSObject {
         self.userAgent = userAgent
     }
     
-    func makeRequest(method: String, uri: String, headers: Dictionary<String, String>, body: String, completion: (NSData, NSHTTPURLResponse?) -> ()) {
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        config.HTTPAdditionalHeaders = headers
-        let session = NSURLSession(
+    func makeRequest(_ method: String,
+                       uri: String,
+                       headers: Dictionary<String, String>,
+                       body: String,
+                       completion: @escaping (Data, HTTPURLResponse?) -> ()) {
+        let config = URLSessionConfiguration.default
+        config.httpAdditionalHeaders = headers
+        let session = URLSession(
             configuration: config,
             delegate: NSURLSessionPinningDelegate(),
             delegateQueue: nil)
-        let url = NSURL(string: "https://\(self.host)\(uri)")
-        let request = NSMutableURLRequest(URL: url!)
-        request.HTTPMethod = method
+        let url = URL(string: "https://\(self.host)\(uri)")
+        var request = URLRequest.init(url: url!)
+        request.httpMethod = method
         if body != "" {
-            request.HTTPBody = body.dataUsingEncoding(NSUTF8StringEncoding)
+            request.httpBody = body.data(using: String.Encoding.utf8)
         }
-        let task = session.dataTaskWithRequest(request) {
-            (let data, let response, let error) in
+        let task = session.dataTask(with: request, completionHandler: {
+            (data, response, error) in
 
             if error != nil {
                 print("Error making request: \(error?.localizedDescription)")
                 return
-            } else if let httpResponse = response as? NSHTTPURLResponse {
+            } else if let httpResponse = response as? HTTPURLResponse {
                 completion(data!, httpResponse)
             } else {
                 completion(data!, nil)
             }
-        }
+        })
         task.resume()
     }
     
     /*
         params should either be Dictionary<String, String> or Dictionary<String, [String]>.
      */
-    func duoAPICall(method: String, path: String, params: Dictionary<String, AnyObject>, completion: (NSData, NSHTTPURLResponse?) -> ()) {
-        let now = Util.rfc2822Date(NSDate())
+    func duoAPICall(_ method: String, path: String, params: Dictionary<String, AnyObject>, completion: @escaping (Data, HTTPURLResponse?) -> ()) {
+        let now = Util.rfc2822Date(Date())
         let normalizedParams: Dictionary<String, [String]> = Util.normalizeParams(params)
         let authHeader = Util.basicAuth(self.ikey,
                                         skey: self.skey,
@@ -89,22 +93,22 @@ public class Client: NSObject {
     /*
         params should either be Dictionary<String, String> or Dictionary<String, [String]>.
      */
-    func duoJSONAPICall(method: String,
-                        path: String,
-                        params: Dictionary<String, AnyObject>,
-                        completion: AnyObject -> ()) {
+    func duoJSONAPICall(_ method: String,
+                          path: String,
+                          params: Dictionary<String, AnyObject>,
+                          completion: @escaping (AnyObject) -> ()) {
         self.duoAPICall(method, path: path, params: params, completion: {
-            (let data, let httpResponse) in
+            (data, httpResponse) in
 
             let parsedJSON = self.parseJSONResponse(data)
             completion(parsedJSON)
         })
     }
     
-    func parseJSONResponse(data: NSData) -> AnyObject {
-        var json: AnyObject = [:]
+    func parseJSONResponse(_ data: Data) -> AnyObject {
+        var json = [:] as AnyObject
         do {
-            json = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments)
+            json = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject
             if let stat = json["stat"] as? String {
                 if stat == "FAIL" {
                     if let messageDetail = json["message_detail"] as? String {

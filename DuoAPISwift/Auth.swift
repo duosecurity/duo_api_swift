@@ -9,7 +9,7 @@
 //
 //  http://www.duosecurity.com/docs/authapi
 
-public class Auth: Client {
+open class Auth: Client {
     /*
         Determine if the Duo service is up and responding.
      
@@ -17,7 +17,7 @@ public class Auth: Client {
             'time': <int:UNIX timestamp>,
         }
      */
-    public func ping(completion: AnyObject -> ()) {
+    open func ping(_ completion: @escaping (AnyObject) -> ()) {
         self.duoJSONAPICall("GET",
                             path: "/auth/v2/ping",
                             params: [:],
@@ -35,7 +35,7 @@ public class Auth: Client {
             'time': <int:UNIX timestamp>,
         }
      */
-    public func check(completion: AnyObject -> ()) {
+    open func check(_ completion: @escaping (AnyObject) -> ()) {
         self.duoJSONAPICall("GET",
                             path: "/auth/v2/check",
                             params: [:],
@@ -48,16 +48,16 @@ public class Auth: Client {
     /*
         Retrieve the user-supplied logo.
      */
-    public func logo(completion: AnyObject -> ()) {
+    open func logo(_ completion: @escaping (AnyObject) -> ()) {
         self.duoAPICall("GET",
                         path: "/auth/v2/logo",
                         params: [:],
                         completion: {
-                            (let data, let httpResponse) in
+                            (data, httpResponse) in
 
                             if let contentType = httpResponse?.allHeaderFields["Content-Type"] as? String {
                                 if contentType.hasPrefix("image/") {
-                                    completion(data)
+                                    completion(data as AnyObject)
                                 } else {
                                     completion(self.parseJSONResponse(data))
                                 }
@@ -80,10 +80,10 @@ public class Auth: Client {
             'valid_secs': <int:seconds>,
         }
      */
-    public func enroll(username: String = "",
+    open func enroll(_ username: String = "",
                        validSeconds: Int = 0,
                        bypassCodes: Int = 0,
-                       completion: AnyObject -> ()) {
+                       completion: @escaping (AnyObject) -> ()) {
         var params: Dictionary<String, String> = [:]
         if username != "" {
             params["username"] = username
@@ -96,7 +96,7 @@ public class Auth: Client {
         }
         self.duoJSONAPICall("POST",
                             path: "/auth/v2/enroll",
-                            params: params,
+                            params: params as Dictionary<String, AnyObject>,
                             completion: { response in
                                 completion(response)
             }
@@ -109,16 +109,16 @@ public class Auth: Client {
         Returns a string constant indicating whether the user has been
         enrolled or the code remains unclaimed.
      */
-    public func enrollStatus(userID: String = "",
+    open func enrollStatus(_ userID: String = "",
                              activationCode: String = "",
-                             completion: AnyObject -> ()) {
+                             completion: @escaping (AnyObject) -> ()) {
         let params = [
             "user_id": userID,
             "activation_code": activationCode
         ]
         self.duoJSONAPICall("POST",
                             path: "/auth/v2/enroll_status",
-                            params: params,
+                            params: params as Dictionary<String, AnyObject>,
                             completion: { response in
                                 completion(response)
             }
@@ -130,11 +130,11 @@ public class Auth: Client {
      
         See the adminapi docs for parameter and response information.
      */
-    public func preAuth(username: String = "",
-                     userID: String = "",
-                     ipAddress: String = "",
-                     trustedDeviceToken: String = "",
-                     completion: AnyObject -> ()) {
+    open func preAuth(_ username: String = "",
+                        userID: String = "",
+                        ipAddress: String = "",
+                        trustedDeviceToken: String = "",
+                        completion: @escaping (AnyObject) -> ()) {
         var params: Dictionary<String, String> = [:]
         if username != "" {
             params["username"] = username
@@ -150,7 +150,7 @@ public class Auth: Client {
         }
         self.duoJSONAPICall("POST",
                             path: "/auth/v2/preauth",
-                            params: params,
+                            params: params as Dictionary<String, AnyObject>,
                             completion: { response in
                                 completion(response)
             }
@@ -175,7 +175,7 @@ public class Auth: Client {
      
         * trusted_device_token: <str: device token for use with preauth>
      */
-    public func auth(factor: String,
+    open func auth(_ factor: String,
                      username: String = "",
                      userID: String = "",
                      ipAddress: String = "",
@@ -185,10 +185,10 @@ public class Auth: Client {
                      pushInfo: String = "",
                      device: String = "",
                      passcode: String = "",
-                     completion: AnyObject -> ()) {
+                     completion: @escaping (AnyObject) -> ()) {
         var params = [
             "factor": factor,
-            "async": String(Int(asynchronous))
+            "async": asynchronous ? "1" : "0"
         ]
         if username != "" {
             params["username"] = username
@@ -216,7 +216,7 @@ public class Auth: Client {
         }
         self.duoJSONAPICall("POST",
                             path: "/auth/v2/auth",
-                            params: params,
+                            params: params as Dictionary<String, AnyObject>,
                             completion: { response in
                                 completion(response)
             }
@@ -244,13 +244,13 @@ public class Auth: Client {
         * trusted_device_token: String token to bypass second-factor
           authentication for this user during an admin-defined period.
      */
-    public func authStatus(txid: String, completion: AnyObject -> ()) {
+    open func authStatus(_ txid: String, completion: @escaping (AnyObject) -> ()) {
         let params = [
             "txid": txid,
         ]
         self.duoJSONAPICall("GET",
                             path: "/auth/v2/auth_status",
-                            params: params,
+                            params: params as Dictionary<String, AnyObject>,
                             completion: { response in
                                 completion(response)
             }

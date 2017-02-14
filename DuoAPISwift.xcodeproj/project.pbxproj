@@ -107,7 +107,6 @@
 				57FDEE9A1DAEB0E9003869AD /* Trusted CA Certificates */,
 				570863951D428B9F00FB86B6 /* Info.plist */,
 			);
-			name = DuoAPISwift;
 			path = DuoAPISwift;
 			sourceTree = "<group>";
 		};
@@ -118,7 +117,6 @@
 				7FA9A8111D5BCEAB009D5639 /* ClientTests.swift */,
 				570863A11D428B9F00FB86B6 /* Info.plist */,
 			);
-			name = DuoAPISwiftTests;
 			path = DuoAPISwiftTests;
 			sourceTree = "<group>";
 		};
@@ -196,11 +194,11 @@
 				TargetAttributes = {
 					5708638F1D428B9F00FB86B6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 					570863991D428B9F00FB86B6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -395,7 +393,7 @@
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CommonCrypto";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -418,7 +416,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_INCLUDE_PATHS = "${SRCROOT}/CommonCrypto";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -430,7 +428,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duosecurity.DuoAPISwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -442,7 +440,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.duosecurity.DuoAPISwiftTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

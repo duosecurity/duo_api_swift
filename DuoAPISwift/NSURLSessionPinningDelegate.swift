@@ -9,30 +9,30 @@
 import Foundation
 import Security
 
-class NSURLSessionPinningDelegate: NSObject, NSURLSessionDelegate {
+class NSURLSessionPinningDelegate: NSObject, URLSessionDelegate {
 
-    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
 
         // Adapted from OWASP https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning#iOS
 
         if (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust) {
             if let serverTrust = challenge.protectionSpace.serverTrust {
-                var secresult = SecTrustResultType.Invalid
+                var secresult = SecTrustResultType.invalid
                 let status = SecTrustEvaluate(serverTrust, &secresult)
 
                 if (status == errSecSuccess) {
                     let count = SecTrustGetCertificateCount(serverTrust)
                     if let serverCertificate = SecTrustGetCertificateAtIndex(serverTrust, count - 1) {
-                        let serverCertificateData: CFDataRef = SecCertificateCopyData(serverCertificate)
+                        let serverCertificateData: CFData = SecCertificateCopyData(serverCertificate)
                         let data = CFDataGetBytePtr(serverCertificateData)
                         let size = CFDataGetLength(serverCertificateData)
-                        let receivedCert = NSData(bytes: data, length: size)
-                        if let frameworkBundle = NSBundle(identifier: "com.duosecurity.DuoAPISwift") {
-                            let trustedCACertificates = frameworkBundle.pathsForResourcesOfType("der", inDirectory: "Resources")
+                        let receivedCert = Data(bytes: UnsafePointer<UInt8>(data!), count: size)
+                        if let frameworkBundle = Bundle(identifier: "com.duosecurity.DuoAPISwift") {
+                            let trustedCACertificates = frameworkBundle.paths(forResourcesOfType: "der", inDirectory: "Resources")
                             for cert in trustedCACertificates {
-                                if let expectedCert = NSData(contentsOfFile: cert) {
-                                    if receivedCert.isEqualToData(expectedCert) {
-                                        completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential, NSURLCredential(forTrust:serverTrust))
+                                if let expectedCert = try? Data(contentsOf: URL(fileURLWithPath: cert)) {
+                                    if receivedCert == expectedCert {
+                                        completionHandler(Foundation.URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust:serverTrust))
                                         return
                                     }
                                 }
@@ -43,6 +43,6 @@ class NSURLSessionPinningDelegate: NSObject, NSURLSessionDelegate {
             }
         }
         // Pinning failed
-        completionHandler(NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge, nil)
+        completionHandler(Foundation.URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
     }
 }
