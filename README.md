@@ -18,7 +18,7 @@ The [Duo Auth API][1] provides a low-level API for adding strong two-factor auth
 To install DuoAPISwift with [CocoaPods][2], add the following line to your `Podfile`.
 
 ```
-pod 'DuoAPISwift', '~> 1.3'
+pod 'DuoAPISwift', '~> 2.0'
 ```
 
 Then run `pod install` to add DuoAPISwift to your project.
@@ -28,7 +28,7 @@ Then run `pod install` to add DuoAPISwift to your project.
 To install DuoAPISwift with Carthage, add the following to your `Cartfile`.
 
 ```
-github "duosecurity/duo_api_swift" ~> 1.3
+github "duosecurity/duo_api_swift" ~> 2.0
 ```
 
 Then run `carthage update` to build the framework. When finished, drag `DuoAPISwift.framework` to your Xcode project.

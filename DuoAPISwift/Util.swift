@@ -14,10 +14,10 @@ class Util: NSObject {
      
         https://www.ietf.org/rfc/rfc2822.txt
      */
-    class func rfc2822Date(date: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
+    class func rfc2822Date(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"
-        let dateString = dateFormatter.stringFromDate(date)
+        let dateString = dateFormatter.string(from: date)
         return dateString
     }
     
@@ -25,7 +25,7 @@ class Util: NSObject {
         Return copy of params with string listified and unicode strings utf-8 encoded.
         params should either be Dictionary<String, String> or Dictionary<String, [String]>.
      */
-    class func normalizeParams(params: Dictionary<String, AnyObject>) -> Dictionary<String, [String]> {
+    class func normalizeParams(_ params: Dictionary<String, Any>) -> Dictionary<String, [String]> {
         var params = params
         var result: Dictionary<String, [String]> = [:]
         
@@ -48,17 +48,17 @@ class Util: NSObject {
     /*
         Return a canonical string version of the given request parameters.
      */
-    class func canonicalizeParams(params: Dictionary<String, [String]>) -> String {
+    class func canonicalizeParams(_ params: Dictionary<String, [String]>) -> String {
         var firstOneAdded = false
         var paramsAsString: String = ""
-        let contentKeys: Array<String> = Array(params.keys).sort({
-            $0.compare($1, options: NSStringCompareOptions.LiteralSearch) == NSComparisonResult.OrderedAscending
+        let contentKeys: Array<String> = Array(params.keys).sorted(by: {
+            $0.compare($1, options: NSString.CompareOptions.literal) == ComparisonResult.orderedAscending
         })
         
         for contentKey in contentKeys {
             let contentValues: Array<String> = params[contentKey]!
-            let sortedValues = contentValues.sort({
-                $0.compare($1, options: NSStringCompareOptions.LiteralSearch) == NSComparisonResult.OrderedAscending
+            let sortedValues = contentValues.sorted(by: {
+                $0.compare($1, options: NSString.CompareOptions.literal) == ComparisonResult.orderedAscending
             })
             
             for value in sortedValues {
@@ -76,29 +76,33 @@ class Util: NSObject {
     /*
         Return signature version 2 canonical string of given request attributes.
      */
-    class func canonicalize(method: String, host: String, path: String, params: Dictionary<String, [String]>, dateString: String) -> String {
+    class func canonicalize(_ method: String,
+                              host: String,
+                              path: String,
+                              params: Dictionary<String, [String]>,
+                              dateString: String) -> String {
         let canonicalHeaders = [
-            dateString, method.uppercaseString,
-            host.lowercaseString, path,
+            dateString, method.uppercased(),
+            host.lowercased(), path,
             self.canonicalizeParams(params)]
-        return canonicalHeaders.joinWithSeparator("\n")
+        return canonicalHeaders.joined(separator: "\n")
     }
     
     /*
         Return basic authorization header line with a Duo Web API signature.
      */
-    class func basicAuth(ikey: String,
-                         skey: String,
-                         method: String,
-                         host: String,
-                         path: String,
-                         dateString: String,
-                         params: Dictionary<String, [String]>) -> String {
+    class func basicAuth(_ ikey: String,
+                           skey: String,
+                           method: String,
+                           host: String,
+                           path: String,
+                           dateString: String,
+                           params: Dictionary<String, [String]>) -> String {
         // Create the canonical string.
         let canonicalHeadersString = canonicalize(method, host: host, path: path, params: params, dateString: dateString)
         
         // Sign the canonical string.
-        let signatureHexDigest = canonicalHeadersString.hmac(CryptoAlgorithm.SHA1, key: skey)
+        let signatureHexDigest = canonicalHeadersString.hmac(CryptoAlgorithm.sha1, key: skey)
         let authHeader = "\(ikey):\(signatureHexDigest)"
         let base64EncodedAuthHeader = authHeader.toBase64()
         return "Basic \(base64EncodedAuthHeader)"
