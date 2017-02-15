@@ -41,16 +41,16 @@ Then run `carthage update` to build the framework. When finished, drag `DuoAPISw
 import DuoAPISwift
 
 let auth = Auth(
-	ikey: "<IKEY>",
-	skey: "<SKEY (Keep this secret!)>",
-	host: "api-xxxxxxxx.duosecurity.com")
+    ikey: "<IKEY>",
+    skey: "<SKEY (Keep this secret!)>",
+    host: "api-xxxxxxxx.duosecurity.com")
 ```
 
 ### Verify that Duo Is Up and Running
 
 ```
 auth.ping({response in
-	print(response)
+    print(response)
 })
 ```
 
@@ -58,7 +58,7 @@ auth.ping({response in
 
 ```
 auth.check({response in
-	print(response)
+    print(response)
 })
 ```
 
@@ -66,11 +66,11 @@ auth.check({response in
 
 ```
 auth.logo({ response in
-	if let data = response as? NSData {
-		if let image = NSImage(data: data) {
-			self.logoImageView.image = image
-		}
-	}
+    if let data = response as? NSData {
+        if let image = NSImage(data: data as Data) {
+            self.logoImageView.image = image
+        }
+    }
 })
 ```
 
@@ -78,21 +78,21 @@ auth.logo({ response in
 
 ```
 auth.auth("push",
-		  username: "<USERNAME>",
-		  device: "auto",
-		  completion: { response in
-	var allowed = false
-	if let r = response["response"],
-		   result = r?["result"] as? String {
-		if result == "allow" {
-			allowed = true
-		}
-	}
-	if allowed {
-		print("Success. Logging you in...")
-	} else {
-		print("Access denied.")
-	}
+          username: "<USERNAME>",
+          device: "auto",
+          completion: { response in
+    var allowed = false
+    if let r = response["response"] as? [String : Any],
+            let result = r["result"] as? String {
+        if result == "allow" {
+            allowed = true
+        }
+    }
+    if allowed {
+        print("Success. Logging you in...")
+    } else {
+        print("Access denied.")
+    }
 })
 ```
 
