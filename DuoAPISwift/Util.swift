@@ -17,7 +17,10 @@ class Util: NSObject {
     class func rfc2822Date(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss Z"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         let dateString = dateFormatter.string(from: date)
+    
         return dateString
     }
     
