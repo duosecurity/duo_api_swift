@@ -7,6 +7,10 @@
 
 DuoAPISwift is an API client to call Duo API methods with Swift.
 
+If you have a feature request or a bug to report, please contact support@duo.com.
+
+Otherwise, if you have specific questions about how to use this library or want to make it better, please open an issue here in Github or submit a pull request as needed. We do not have ETA's on when pull requests will get merged in, but we will do our best to take a look at them as soon as possible.
+
 ## Duo Auth API
 
 The [Duo Auth API][1] provides a low-level API for adding strong two-factor authentication to applications that cannot directly display rich web content.
