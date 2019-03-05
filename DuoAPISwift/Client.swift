@@ -14,6 +14,11 @@ open class Client: NSObject {
     let host: String
     var userAgent: String
     
+    // Constants for handling rate limit backoff and retries
+    let MAX_BACKOFF_WAIT_MS: UInt32 = 32000
+    let BACKOFF_FACTOR: UInt32 = 2
+    let RATE_LIMITED_RESP_CODE: Int = 429
+
     required public init(ikey: String,
                          skey: String,
                          host: String,
@@ -23,12 +28,11 @@ open class Client: NSObject {
         self.host = host
         self.userAgent = userAgent
     }
-    
-    func makeRequest(_ method: String,
-                       uri: String,
-                       headers: Dictionary<String, String>,
-                       body: String,
-                       completion: @escaping (Data, HTTPURLResponse?) -> ()) {
+
+    func createSessionAndRequest(_ method: String,
+                                   uri: String,
+                                   headers: Dictionary<String, String>,
+                                   body: String) -> (URLSession, URLRequest) {
         let config = URLSessionConfiguration.default
         config.httpAdditionalHeaders = headers
         let session = URLSession(
@@ -41,6 +45,34 @@ open class Client: NSObject {
         if body != "" {
             request.httpBody = body.data(using: String.Encoding.utf8)
         }
+        return (session, request)
+    }
+
+    func uSleep(_ waitMS: UInt32) {
+        let randomOffset: UInt32 = arc4random_uniform(1000)
+        usleep(waitMS + randomOffset)
+    }
+
+    func makeRequestWithRetry(_ session: URLSession,
+                                request: URLRequest,
+                                completion: @escaping (Data, HTTPURLResponse?) -> (),
+                                waitMS: UInt32 = 1000) {
+        self.makeRequest(session, request: request, completion: {
+            (data, response) in
+
+            if response?.statusCode == self.RATE_LIMITED_RESP_CODE &&
+               waitMS <= self.MAX_BACKOFF_WAIT_MS {
+                self.uSleep(waitMS)
+                self.makeRequestWithRetry(session, request: request, completion: completion, waitMS: waitMS * self.BACKOFF_FACTOR)
+                return
+            }
+            completion(data, response)
+        })
+    }
+
+    func makeRequest(_ session: URLSession,
+                       request: URLRequest,
+                       completion: @escaping (Data, HTTPURLResponse?) -> ()) {
         let task = session.dataTask(with: request, completionHandler: {
             (data, response, error) in
 
@@ -87,7 +119,10 @@ open class Client: NSObject {
         }
         
         // Do the request.
-        self.makeRequest(method, uri: uri, headers: headers, body: body, completion: completion)
+        let session: URLSession
+        let request: URLRequest
+        (session, request) = self.createSessionAndRequest(method, uri: uri, headers: headers, body: body)
+        self.makeRequestWithRetry(session, request: request, completion: completion)
     }
     
     /*
