@@ -77,7 +77,7 @@ open class Client: NSObject {
             (data, response, error) in
 
             if error != nil {
-                print("Error making request: \(error?.localizedDescription)")
+                print("Error making request: \(error?.localizedDescription ?? "Couldn't unwrap optional error")")
                 return
             } else if let httpResponse = response as? HTTPURLResponse {
                 completion(data!, httpResponse)
