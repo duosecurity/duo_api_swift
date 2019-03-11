@@ -123,41 +123,70 @@ class SignTests: XCTestCase {
         XCTAssertEqual(signature, expectedSignature)
     }
 }
+class PartialMockClient: Client {
+    var mockData: Dictionary<String, String>?
+    var mockResponse: HTTPURLResponse?
+    var statuses: [Int] = []
+    var sleepCalls: [UInt32] = []
+
+    override func makeRequest(_ session: URLSession, request: URLRequest, completion: @escaping (Data, HTTPURLResponse?) -> ()) {
+        var status: Int = 200
+        if (statuses.count > 0) {
+            status = statuses.removeFirst()
+        }
+        mockResponse = HTTPURLResponse(url: mockResponse!.url!, statusCode: status, httpVersion: nil, headerFields: nil)
+        super.makeRequest(session, request: request, completion: completion)
+        completion(NSKeyedArchiver.archivedData(withRootObject: self.mockData!), self.mockResponse)
+    }
+
+    override func createSessionAndRequest(_ method: String,
+                                          uri: String,
+                                          headers: Dictionary<String, String>,
+                                          body: String) -> (URLSession, URLRequest) {
+        mockData = [
+            "method": method,
+            "uri": uri,
+            "body": body,
+            "headers": Util.canonicalizeParams(Util.normalizeParams(headers))
+        ]
+        let url = URL(string: "https://\(host)\(uri)")!
+        mockResponse = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        return super.createSessionAndRequest(method, uri: uri, headers: headers, body: body)
+    }
+
+    override func parseJSONResponse(_ data: Data) -> AnyObject {
+        return NSKeyedUnarchiver.unarchiveObject(with: data)! as AnyObject
+    }
+
+    override func uSleep(_ waitMS: UInt32) {
+        sleepCalls.append(waitMS)
+    }
+
+    func setResponseStatuses(statuses: [Int]) {
+        self.statuses = statuses
+    }
+}
 
 class RequestTests: XCTestCase {
     
     // Tests for the request created by duoAPICall and duoJSONAPICall
     
-    var client: Client!
+    let host = "example.com"
+    var client: PartialMockClient!
     var inputParams: Dictionary<String, [String]> = [:]
     var outputParams: String = ""
-    
+
     override func setUp() {
         super.setUp()
-        
-        class MockClient: Client {
-            override func makeRequest(_ method: String, uri: String, headers: Dictionary<String, String>, body: String, completion: @escaping (Data, HTTPURLResponse?) -> ()) {
-                let response: Dictionary<String, String> = [
-                    "method": method,
-                    "uri": uri,
-                    "body": body,
-                    "headers": Util.canonicalizeParams(Util.normalizeParams(headers))
-                ]
-                completion(NSKeyedArchiver.archivedData(withRootObject: response), nil)
-            }
-            
-            override func parseJSONResponse(_ data: Data) -> AnyObject {
-                return NSKeyedUnarchiver.unarchiveObject(with: data)! as AnyObject
-            }
-        }
-        self.client = MockClient(ikey: "test_ikey", skey: "test_skey", host: "example.com")
+
+        self.client = PartialMockClient(ikey: "test_ikey", skey: "test_skey", host: host)
         self.inputParams = [
             "foo": ["bar"],
             "baz": ["qux", "quux=quuux", "foobar=foobar&barbaz=barbaz"]
         ]
         self.outputParams = Util.canonicalizeParams(Util.normalizeParams(self.inputParams))
     }
-    
+
     func testAPICallGetNoParams() {
         let responseExpectation: XCTestExpectation = expectation(description: "duoAPICall GET with no params")
         
@@ -242,5 +271,61 @@ class RequestTests: XCTestCase {
             XCTAssertEqual(res["uri"] as? String, "/foo/bar")
             XCTAssertEqual(res["body"] as? String, self.outputParams)
         })
+    }
+
+    func testNonRateLimitedCall() {
+        let responseExpectation: XCTestExpectation = expectation(description: "duoAPICall GET with no params")
+        self.client.duoAPICall("GET", path: "/foo/bar", params: [:], completion: {
+            (data, httpResponse) in
+
+            let res = NSKeyedUnarchiver.unarchiveObject(with: data) as! NSDictionary
+            XCTAssertEqual(res["method"] as? String, "GET")
+            XCTAssertEqual(res["uri"] as? String, "/foo/bar")
+            XCTAssertEqual(httpResponse!.statusCode, 200)
+            XCTAssertEqual(self.client.sleepCalls.count, 0)
+
+            responseExpectation.fulfill()
+        })
+
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testSingleRateLimitedCall() {
+        let responseExpectation: XCTestExpectation = expectation(description: "duoAPICall GET with no params")
+        self.client.setResponseStatuses(statuses: [429, 200])
+        self.client.duoAPICall("GET", path: "/foo/bar", params: [:], completion: {
+            (data, httpResponse) in
+
+            let res = NSKeyedUnarchiver.unarchiveObject(with: data) as! NSDictionary
+            XCTAssertEqual(res["method"] as? String, "GET")
+            XCTAssertEqual(res["uri"] as? String, "/foo/bar")
+            XCTAssertEqual(httpResponse!.statusCode, 200)
+            XCTAssertEqual(self.client.sleepCalls.count, 1)
+            XCTAssertEqual(self.client.sleepCalls, [1000])
+
+            responseExpectation.fulfill()
+        })
+
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testAllRateLimitedCalls() {
+        let responseExpectation: XCTestExpectation = expectation(description: "duoAPICall GET with no params")
+        self.client.setResponseStatuses(statuses: [429, 429, 429, 429, 429, 429, 429])
+        self.client.duoAPICall("GET", path: "/foo/bar", params: [:], completion: {
+            (data, httpResponse) in
+
+            let res = NSKeyedUnarchiver.unarchiveObject(with: data) as! NSDictionary
+            XCTAssertEqual(res["method"] as? String, "GET")
+            XCTAssertEqual(res["uri"] as? String, "/foo/bar")
+            XCTAssertEqual(httpResponse!.statusCode, 429)
+            XCTAssertEqual(self.client.sleepCalls.count, 6)
+            XCTAssertEqual(self.client.sleepCalls,
+                           [1000, 2000, 4000, 8000, 16000, 32000])
+
+            responseExpectation.fulfill()
+        })
+
+        waitForExpectations(timeout: 10, handler: nil)
     }
 }
