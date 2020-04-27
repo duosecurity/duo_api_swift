@@ -4,6 +4,9 @@
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/DuoAPISwift.svg)](https://img.shields.io/cocoapods/v/DuoAPISwift.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![GitHub license](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/duosecurity/duo_api_swift/master/LICENSE)
+[![Issues](https://img.shields.io/github/issues/duosecurity/duo_api_swift)](https://github.com/duosecurity/duo_api_swift/issues)
+[![Forks](https://img.shields.io/github/forks/duosecurity/duo_api_swift)](https://github.com/duosecurity/duo_api_swift/network/members)
+[![Stars](https://img.shields.io/github/stars/duosecurity/duo_api_swift)](https://github.com/duosecurity/duo_api_swift/stargazers)
 
 DuoAPISwift is an API client to call Duo API methods with Swift.
 
