@@ -56,7 +56,7 @@ extension String {
         let keyLen = Int(key.lengthOfBytes(using: String.Encoding.utf8))
         CCHmac(algorithm.HMACAlgorithm, keyStr!, keyLen, str!, strLen, result)
         let digest = stringFromResult(result, length: digestLen)
-        result.deallocate(capacity: digestLen)
+        result.deallocate()
         return digest
     }
     
