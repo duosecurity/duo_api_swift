@@ -6,5 +6,5 @@ script:
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -showsdks
-  - xcodebuild -project "DuoAPISwift.xcodeproj" -scheme "DuoAPISwift" -sdk "macosx10.14" build test | xcpretty
+  - xcodebuild -project "DuoAPISwift.xcodeproj" -scheme "DuoAPISwift" -sdk "macosx10.13" build test | xcpretty
   - pod lib lint
