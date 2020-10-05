@@ -19,4 +19,5 @@ Pod::Spec.new do |spec|
   }
   spec.source_files = "DuoAPISwift/**/*.{h,swift}"
   spec.resources = ['DuoAPISwift/Trusted\ CA\ Certificates/*.der']
+  spec.swift_versions = ['5.0']
 end
