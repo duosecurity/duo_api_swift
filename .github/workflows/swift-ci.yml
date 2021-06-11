@@ -1,0 +1,17 @@
+
+name: Build and Test with Swift
+on: [push, pull_request]
+
+jobs:
+   build-and-test:
+     runs-on: macos-latest
+     steps:
+       - uses: actions/checkout@v2
+       - name: Set up pods
+         run: gem install cocoapods --pre --no-document --quiet
+       - name: Build and Test
+         run: |
+           set -o pipefail
+           xcodebuild -project "DuoAPISwift.xcodeproj" -scheme "DuoAPISwift" build test | xcpretty
+       - name: Lint
+         run: pod lib lint
