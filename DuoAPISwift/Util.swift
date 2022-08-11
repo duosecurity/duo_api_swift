@@ -105,7 +105,7 @@ class Util: NSObject {
         let canonicalHeadersString = canonicalize(method, host: host, path: path, params: params, dateString: dateString)
         
         // Sign the canonical string.
-        let signatureHexDigest = canonicalHeadersString.hmac(CryptoAlgorithm.sha1, key: skey)
+        let signatureHexDigest = canonicalHeadersString.hmac(CryptoAlgorithm.sha512, key: skey)
         let authHeader = "\(ikey):\(signatureHexDigest)"
         let base64EncodedAuthHeader = authHeader.toBase64()
         return "Basic \(base64EncodedAuthHeader)"
