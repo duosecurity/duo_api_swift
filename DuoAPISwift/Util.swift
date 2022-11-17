@@ -3,7 +3,7 @@
 //  DuoAPISwift
 //
 //  Created by James Barclay on 7/22/16.
-//  Copyright © 2016 Duo Security. All rights reserved.
+//  Copyright © 2022 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 //
 
 import Foundation

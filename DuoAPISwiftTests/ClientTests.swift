@@ -3,7 +3,7 @@
 //  DuoAPISwift
 //
 //  Created by Mark Lee on 8/10/16.
-//  Copyright © 2016 Duo Security. All rights reserved.
+//  Copyright © 2022 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 //
 
 import XCTest

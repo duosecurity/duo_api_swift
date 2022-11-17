@@ -3,7 +3,7 @@
 //  DuoAPISwift
 //
 //  Created by James Barclay on 7/27/16.
-//  Copyright © 2016 Duo Security. All rights reserved.
+//  Copyright © 2022 Cisco Systems, Inc. and/or its affiliates. All rights reserved.
 //
 //  Duo Security Auth API reference client implementation.
 //
