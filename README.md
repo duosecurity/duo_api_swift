@@ -20,6 +20,10 @@ The [Duo Auth API][1] provides a low-level API for adding strong two-factor auth
 
 ## Installation
 
+### TLS 1.2 and 1.3 Support
+
+All recent releases of the various Apple OSes support TLS 1.2 and 1.3.
+
 ### CocoaPods
 
 To install DuoAPISwift with [CocoaPods][2], add the following line to your `Podfile`.
