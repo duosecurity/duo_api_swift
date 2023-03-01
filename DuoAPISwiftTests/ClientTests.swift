@@ -100,7 +100,7 @@ class SignTests: XCTestCase {
     
     // Tests for proper signature creation for a request.
     
-    func testHMACSHA1() {
+    func testHMACSHA256() {
         let ikey = "test_ikey"
         let skey = "gtdfxv9YgVBYcF6dl2Eq17KUQJN2PLM2ODVTkvoT"
         let signature = Util.basicAuth(ikey,
@@ -115,8 +115,7 @@ class SignTests: XCTestCase {
                                             "\u{7470}\u{9314}\u{901c}\u{9eae}\u{40d8}\u{4201}\u{82d8}\u{8c70}\u{1d31}\u{a042}": ["\u{17d9}\u{0ba8}\u{9358}\u{aadf}\u{a42a}\u{48be}\u{fb96}\u{6fe9}\u{b7ff}\u{32f3}"],
                                             "\u{c2c5}\u{2c1d}\u{2620}\u{3617}\u{96b3}F\u{8605}\u{20e8}\u{ac21}\u{5934}": ["\u{fba9}\u{41aa}\u{bd83}\u{840b}\u{2615}\u{3e6e}\u{652d}\u{a8b5}\u{d56b}U"]
                                         ])
-
-        var expectedSignature = "\(ikey):f01811cbbf9561623ab45b893096267fd46a5178".toBase64()
+        var expectedSignature = "\(ikey):0508065035a03b2a1de2f453e629e791d180329e157f65df6b3e0f08299d4321e1c5c7a7c7ee6b9e5fc80d1fb6fbf3ad5eb7c44dd3b3985a02c37aca53ec3698".toBase64()
         expectedSignature = expectedSignature.trimmingCharacters(in: CharacterSet.whitespaces)
         expectedSignature = "Basic \(expectedSignature)"
 
