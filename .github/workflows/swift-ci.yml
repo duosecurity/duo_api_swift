@@ -10,7 +10,9 @@ on:
 
 jobs:
    build-and-test:
+     name: Swift CI - test
      runs-on: macos-latest
+     
      steps:
        - uses: actions/checkout@v2
        - name: Set up pods
