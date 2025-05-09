@@ -1,5 +1,6 @@
 # DuoAPISwift
 
+
 [![Build Status](https://github.com/duosecurity/duo_api_swift/actions/workflows/swift-ci.yml/badge.svg)](https://github.com/duosecurity/duo_api_swift/actions/workflows/swift-ci.yml)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/DuoAPISwift.svg)](https://img.shields.io/cocoapods/v/DuoAPISwift.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
